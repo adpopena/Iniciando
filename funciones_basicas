@@ -1,0 +1,75 @@
+apps = ["TikTok","Uber","Instagram","Facebook","Glovo","Whatsapp", "Zoom"]
+categoria = ["entretenimiento","transporte", "comunicación", "comunicación", "delivery", "comunicación", "comunicación"]
+contenido = ["video","mapa-texto","foto-video-texto","foto-video-texto","foto-texto-mapa","llamada-texto-foto-video","video-texto"]
+usuarios = [60.5, 120.3, 80.2, 150.4, 60.3, 190.4, 50.6 ] #millones de usuarios activos
+
+#1.Consultar categoria y contenido
+#categoria
+print("FUNCION CONSULTAR CATEGORIA")
+def consultaCategoria(apps,categoria,catSel):
+    lista_categoria=[]
+    for i in range(len(apps)):
+        if categoria[i] ==catSel :
+            lista_categoria.append(apps[i])
+    return lista_categoria
+catSel=input("Ingrese la categoria que desee buscar:").lower().strip()
+while catSel not in categoria:
+    print("\n**DATO INVALIDO**\nIngrese correctamente\n")
+    catSel = input("Ingrese la categoria que desee buscar:").lower().strip()
+print(consultaCategoria(apps,categoria,catSel))
+
+#Contenid
+print("\nFUNCION CONSULTAR CONTENIDO")
+def consultaApps(apps,contenido,clave):
+    lista_apps=[]
+    for i in range(len(apps)):
+        if clave in contenido[i]:
+            lista_apps.append(apps[i])
+
+    return lista_apps
+clave=input("Ingrese clave de contenido:").lower().strip()
+print(consultaApps(apps,contenido,clave))
+
+
+
+#2.Comparar dos apps
+print("\nFUNCION PARA COMPARAR APPS")
+import random as rad
+pos_app1=rad.randint(0,len(apps)-1)
+pos_app2=rad.randint(0,len(apps)-1)
+app1=apps[pos_app1]
+app2=apps[pos_app2]
+def compara2Apps(app1,app2):
+    print("App 1:", app1)
+    print("App 2:", app2)
+    if app1==app2:
+        print("Ambas apps son iguales")
+        print("{} es de tipo {}".format(app1,categoria[pos_app1]))
+        print("Tienen la misma cantidad de contenido {}".format(contenido[pos_app1].split("-")))
+        print("Tienen misma cantidad de usuarios activos {:.2f}".format(usuarios[pos_app1]))
+
+    else:
+        print("{} es de tipo {} y {} de tipo {}".format(app1, categoria[pos_app1], app2, categoria[pos_app2]))
+
+
+        cantidad_con1=len(contenido[pos_app1].split("-"))
+        cantidad_con2=len(contenido[pos_app2].split("-"))
+        contenido_app1=contenido[pos_app1].split("-")
+        contenido_app2=contenido[pos_app2].split("-")
+        if cantidad_con1 > cantidad_con2:
+            print("{} permite mayor tipo de contenido {} y {} solo {} {}".format(app1,contenido_app1,app2,cantidad_con2,contenido_app2))
+        elif cantidad_con1 == cantidad_con2:
+            print("Ambas apps tienen la misma cantidad de contenido {}, {} tiene tipo de contenido {} y {} tiene {} ".format(cantidad_con1,app1,contenido_app1,app2,contenido_app2))
+        else:
+            print("{} permite mayor tipo de contenido {} y {} solo {} {}".format(app2,contenido_app2,app1,cantidad_con1,contenido_app1))
+
+
+        cantidad_user1 = usuarios[pos_app1]
+        cantidad_user2 = usuarios[pos_app2]
+        if cantidad_user1 > cantidad_user2:
+            print("{} tiene mas usuarios activos {:.2f} millones VS {} que tiene {:.2f} millones".format(app1,cantidad_user1,app2,cantidad_user2))
+        else:
+            print("{} tiene mas usuarios activos {:.2f} millones VS {} que tiene {:.2f} millones".format(app2,cantidad_user2,app1,cantidad_user1))
+
+compara2Apps(app1,app2)
+
